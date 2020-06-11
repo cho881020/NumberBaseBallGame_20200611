@@ -60,8 +60,9 @@ class MainActivity : BaseActivity() {
                 }
 
 
-//                조건에 맞는 숫자를 뽑으면 무한반복 탈출
+//                조건에 맞는 숫자를 뽑으면 배열에 대입 => 무한반복 탈출
                 if (isNumberOk) {
+                    computerNumbers.add(randomNum)
                     break
                 }
             }
