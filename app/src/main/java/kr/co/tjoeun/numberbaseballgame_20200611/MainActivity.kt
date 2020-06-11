@@ -2,6 +2,7 @@ package kr.co.tjoeun.numberbaseballgame_20200611
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -63,6 +64,9 @@ class MainActivity : BaseActivity() {
 
 //            리스트뷰에 연결된 배열의 내용이 변하면 => 새로고침
             mChatAdapter.notifyDataSetChanged()
+
+//            여기서도 자동 스크롤 처리 진행
+            chatListView.smoothScrollToPosition(chatMessageList.size-1)
 
 //            입력 하고나면 edittext의 내용을 다시 빈칸으로
 //            EditText 에는 text = String이 잘 먹히지 않는다. setText로 대신 사용
@@ -183,21 +187,28 @@ class MainActivity : BaseActivity() {
 //        ?S ?B 인지 변수에 담겨있다. => 채팅메세지로 가공해서 컴퓨터가 답장
         val answer = Chat("CPU", "${strikeCount}S ${ballCount}B 입니다.")
 
-//        채팅내역으로 추가
-        chatMessageList.add(answer)
+//    답장은 약 1초 후에 올라오도록 => 1초후에 실행
+        val myHandler = Handler()
+        myHandler.postDelayed({
+//            채팅내역으로 추가 => 정답 (3S) 체크
 
-        mChatAdapter.notifyDataSetChanged()
+//        채팅내역으로 추가
+            chatMessageList.add(answer)
+
+            mChatAdapter.notifyDataSetChanged()
 
 //        리스트뷰에 내용물이 추가되고 나서 => 바닥으로 리스트를 끌어내리자.
 //            목록중 맨 마지막 것으로 이동.
 //          목록중 맨 마지막의 포지션?  채팅 : 10개 => 마지막 : 9번 채팅 23 => 마지막 : 22
-        chatListView.smoothScrollToPosition(chatMessageList.size - 1)
+            chatListView.smoothScrollToPosition(chatMessageList.size - 1)
 
 
 //        3S라면, 게임을 종료처리
-        if (strikeCount == 3) {
-            finishGame()
-        }
+            if (strikeCount == 3) {
+                finishGame()
+            }
+
+        }, 1000)
 
     }
 
