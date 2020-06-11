@@ -80,11 +80,14 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setValues() {
-//        컴퓨터에게 문제를 내라고 시키자. => 문제 : 3칸자리 숫자 배열.
-        makeComputerNumber()
 
         mChatAdapter = ChatAdapter(mContext, R.layout.chat_list_item, chatMessageList)
         chatListView.adapter = mChatAdapter
+
+
+//        컴퓨터에게 문제를 내라고 시키자. => 문제 : 3칸자리 숫자 배열.
+        makeComputerNumber()
+
     }
 
     fun makeComputerNumber() {
@@ -138,8 +141,19 @@ class MainActivity : BaseActivity() {
 
 //        문제를 다 내고, 안내 메세지를 채팅으로 출력.
         chatMessageList.add(Chat("CPU", "숫자 야구 게임에 오신것을 환영합니다."))
-        chatMessageList.add(Chat("CPU", "제가 생각하는 세자리 숫자를 맞춰주세요."))
-        chatMessageList.add(Chat("CPU", "1~9의 숫자로만 구성되고, 중복된 숫자는 없습니다."))
+        mChatAdapter.notifyDataSetChanged()
+
+        Handler().postDelayed({
+            chatMessageList.add(Chat("CPU", "제가 생각하는 세자리 숫자를 맞춰주세요."))
+            mChatAdapter.notifyDataSetChanged()
+        }, 1500)
+
+        Handler().postDelayed({
+            chatMessageList.add(Chat("CPU", "1~9의 숫자로만 구성되고, 중복된 숫자는 없습니다."))
+            mChatAdapter.notifyDataSetChanged()
+        }, 3000)
+
+
 
     }
 
