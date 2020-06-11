@@ -127,6 +127,40 @@ class MainActivity : BaseActivity() {
         inputNumArr.add(inputNum / 10 % 10) // 10의자리 - 569 /10 %10
         inputNumArr.add(inputNum % 10) // 1의자리 - 569 % 10
 
+//        S / B 갯수를 구할 변수
+        var strikeCount = 0
+        var ballCount = 0
+
+//        사용자 숫자를 들고 => 컴퓨터숫자를 조회 => 통째로 반복
+
+        for (i in inputNumArr.indices) {
+            for (j in computerNumbers.indices) {
+
+//                같은 숫자를 찾았다! => S / B 추가 질문 필요
+                if (inputNumArr[i] == computerNumbers[j]) {
+//                    위치도 같은가?
+                    if (i == j) {
+//                        S 발견!
+                        strikeCount++
+                    }
+                    else {
+//                        B 발견!
+                        ballCount++
+                    }
+
+                }
+
+            }
+        }
+
+//        ?S ?B 인지 변수에 담겨있다. => 채팅메세지로 가공해서 컴퓨터가 답장
+        val answer = Chat("CPU", "${strikeCount}S ${ballCount}B 입니다.")
+
+//        채팅내역으로 추가
+        chatMessageList.add(answer)
+
+        mChatAdapter.notifyDataSetChanged()
+
     }
 
 }
