@@ -38,7 +38,7 @@ class MainActivity : BaseActivity() {
 //                1 <= (Math.random()*9+1).toInt() < 10
                 val randomNum = (Math.random()*9+1).toInt()
 
-                Log.d("랜덤값", randomNum.toString())
+//                Log.d("랜덤값", randomNum.toString())
 
 //                뽑은 숫자를 사용해도 될지? 저장하는 변수.
                 var isNumberOk = true
@@ -67,6 +67,12 @@ class MainActivity : BaseActivity() {
                 }
             }
 
+        }
+
+
+//        문제가 뭔지? 확인 for
+        for (num in computerNumbers) {
+            Log.d("최종선발문제", num.toString())
         }
 
     }
