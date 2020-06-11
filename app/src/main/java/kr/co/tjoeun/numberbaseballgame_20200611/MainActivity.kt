@@ -35,6 +35,19 @@ class MainActivity : BaseActivity() {
 //            사용자가 입력한 값을 String으로 우선 저장
             val inputNumStr = numberInputEdt.text.toString()
 
+//            이 글자의 길이가 몇글자인지?
+//            3글자가 아니라면 아예 입력 불가
+//             => 토스트로 안내를 주고 이 함수를 강제 종료
+
+            if (inputNumStr.length != 3) {
+                Toast.makeText(mContext, "숫자는 반드시 세자리 여야 합니다.",  Toast.LENGTH_SHORT).show()
+//                return : 결과가 뭔지 지정하기 위한 키워드
+//                리턴타입이 없는 함수에서의 return : 함수를 강제 종료시키는 키워드로 사용
+
+//                @ 어느 함수를 종료시키는지 명확히 명시. - Kotlin
+                return@setOnClickListener
+            }
+
 //            사용자가 입력한 숫자를 채팅 메세지로 변환
             val userChat = Chat("USER", inputNumStr)
 
