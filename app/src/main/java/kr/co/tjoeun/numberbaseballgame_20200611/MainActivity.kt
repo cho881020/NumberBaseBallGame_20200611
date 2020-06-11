@@ -188,6 +188,12 @@ class MainActivity : BaseActivity() {
 
         mChatAdapter.notifyDataSetChanged()
 
+//        리스트뷰에 내용물이 추가되고 나서 => 바닥으로 리스트를 끌어내리자.
+//            목록중 맨 마지막 것으로 이동.
+//          목록중 맨 마지막의 포지션?  채팅 : 10개 => 마지막 : 9번 채팅 23 => 마지막 : 22
+        chatListView.smoothScrollToPosition(chatMessageList.size - 1)
+
+
 //        3S라면, 게임을 종료처리
         if (strikeCount == 3) {
             finishGame()
