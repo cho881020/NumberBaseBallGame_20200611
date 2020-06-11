@@ -33,7 +33,9 @@ class MainActivity : BaseActivity() {
 //            규칙에 맞는 숫자를 뽑을때 까지 무한반복
             while (true) {
 
-//                TODO 1~9의 숫자를 랜덤으로 뽑자.
+//                1~9의 숫자를 랜덤으로 뽑자.
+//                1 <= (Math.random()*9+1).toInt() < 10
+                val randomNum = (Math.random()*9+1).toInt()
 
 //                뽑은 숫자를 사용해도 될지? 저장하는 변수.
                 var isNumberOk = true
