@@ -48,6 +48,13 @@ class MainActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
+
+//            0이 포함되어 있다면 안내 처리
+            if (inputNumStr.contains("0")) {
+                Toast.makeText(mContext, "0은 문제에 포함되지 않습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
 //            사용자가 입력한 숫자를 채팅 메세지로 변환
             val userChat = Chat("USER", inputNumStr)
 
