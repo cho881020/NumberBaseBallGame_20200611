@@ -3,6 +3,8 @@ package kr.co.tjoeun.numberbaseballgame_20200611
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import kotlinx.android.synthetic.main.activity_main.*
+import kr.co.tjoeun.numberbaseballgame_20200611.adapters.ChatAdapter
 import kr.co.tjoeun.numberbaseballgame_20200611.datas.Chat
 
 class MainActivity : BaseActivity() {
@@ -12,6 +14,8 @@ class MainActivity : BaseActivity() {
 
 //    채팅 내역을 담아줄 ArrayList
     val chatMessageList = ArrayList<Chat>()
+
+    lateinit var mChatAdapter : ChatAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +32,9 @@ class MainActivity : BaseActivity() {
     override fun setValues() {
 //        컴퓨터에게 문제를 내라고 시키자. => 문제 : 3칸자리 숫자 배열.
         makeComputerNumber()
+
+        mChatAdapter = ChatAdapter(mContext, R.layout.chat_list_item, chatMessageList)
+        chatListView.adapter = mChatAdapter
     }
 
     fun makeComputerNumber() {
