@@ -11,6 +11,9 @@ import kr.co.tjoeun.numberbaseballgame_20200611.datas.Chat
 
 class MainActivity : BaseActivity() {
 
+//    시도한 숫자들을 저장하는 배열 => 중복 입력을 막아주자
+    val tryNumberStrArr = ArrayList<String>()
+
 //    몇번 시도 했는지 저장할 변수
     var inputCount = 0
 
@@ -55,6 +58,21 @@ class MainActivity : BaseActivity() {
                 Toast.makeText(mContext, "0은 문제에 포함되지 않습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
+//            이미 시도해본 숫자라면 다시 시도하지 않도록 막자.
+            for (alreadyNumStr in tryNumberStrArr) {
+//                시도해본 숫자와 지금 입력한 숫자가 같은가?
+                if (alreadyNumStr == inputNumStr) {
+//                    중복을 발견하면 안내하고 강제종료
+                    Toast.makeText(mContext, "${inputNumStr}은 이미 시도해본 숫자입니다.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+
+                }
+            }
+
+//            시도 해본 숫자 목록에 등록
+            tryNumberStrArr.add(inputNumStr)
+
 
 //            사용자가 입력한 숫자를 채팅 메세지로 변환
             val userChat = Chat("USER", inputNumStr)
