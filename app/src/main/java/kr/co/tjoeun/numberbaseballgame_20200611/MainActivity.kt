@@ -3,6 +3,7 @@ package kr.co.tjoeun.numberbaseballgame_20200611
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.co.tjoeun.numberbaseballgame_20200611.adapters.ChatAdapter
 import kr.co.tjoeun.numberbaseballgame_20200611.datas.Chat
@@ -160,6 +161,30 @@ class MainActivity : BaseActivity() {
         chatMessageList.add(answer)
 
         mChatAdapter.notifyDataSetChanged()
+
+//        3S라면, 게임을 종료처리
+        if (strikeCount == 3) {
+            finishGame()
+        }
+
+    }
+
+//    정답을 맞추면 게임을 종료.
+    fun finishGame() {
+
+//        축하 메세지 CPU가 이야기
+        val congratulation = Chat("CPU", "축하합니다! 정답을 맞췄습니다!")
+        chatMessageList.add(congratulation)
+        mChatAdapter.notifyDataSetChanged()
+
+//        몇번만에 맞췄는지? CPU가 이야기해줘야함.
+
+//        더이상 입력하지 못하도록 처리.
+        numberInputEdt.isEnabled = false
+        okBtn.isEnabled = false
+
+//      종료 알림 토스트
+        Toast.makeText(mContext, "이용해 주셔서 감사합니다.", Toast.LENGTH_LONG).show()
 
     }
 
