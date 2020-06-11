@@ -44,6 +44,9 @@ class MainActivity : BaseActivity() {
 //            EditText 에는 text = String이 잘 먹히지 않는다. setText로 대신 사용
             numberInputEdt.setText("")
 
+//            ?S ?B 을 판단해주는 기능 실행 => 입력한 내용을 Int로 변환해서 전달
+            checkStrikeAndBall(inputNumStr.toInt())
+
         }
 
     }
@@ -109,6 +112,20 @@ class MainActivity : BaseActivity() {
         chatMessageList.add(Chat("CPU", "숫자 야구 게임에 오신것을 환영합니다."))
         chatMessageList.add(Chat("CPU", "제가 생각하는 세자리 숫자를 맞춰주세요."))
         chatMessageList.add(Chat("CPU", "1~9의 숫자로만 구성되고, 중복된 숫자는 없습니다."))
+
+    }
+
+//    ?S ?B인지 계산해서 리스트뷰에 답장 띄우기 기능 담당 함수
+    fun checkStrikeAndBall(inputNum:Int) {
+
+//        inputNum에는 세자리 숫자가 들어온다고 전제.
+//        3자리 숫자를 => 3칸의 배열로 분리. 569 => 5,6,9
+        val inputNumArr = ArrayList<Int>()
+
+//       각 자리 채우기
+        inputNumArr.add(inputNum / 100) // 100의자리 - 569 / 100
+        inputNumArr.add(inputNum / 10 % 10) // 10의자리 - 569 /10 %10
+        inputNumArr.add(inputNum % 10) // 1의자리 - 569 % 10
 
     }
 
