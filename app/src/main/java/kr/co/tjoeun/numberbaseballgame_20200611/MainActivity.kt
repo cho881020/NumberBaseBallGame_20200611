@@ -205,7 +205,11 @@ class MainActivity : BaseActivity() {
 
 //        3S라면, 게임을 종료처리
             if (strikeCount == 3) {
-                finishGame()
+
+                Handler().postDelayed({
+                    finishGame()
+                }, 1000)
+
             }
 
         }, 1000)
