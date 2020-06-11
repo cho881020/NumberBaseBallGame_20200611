@@ -27,6 +27,25 @@ class MainActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        okBtn.setOnClickListener {
+//            사용자가 입력한 값을 String으로 우선 저장
+            val inputNumStr = numberInputEdt.text.toString()
+
+//            사용자가 입력한 숫자를 채팅 메세지로 변환
+            val userChat = Chat("USER", inputNumStr)
+
+//            만든 채팅 메세지를 채팅 내역 배열에 추가
+            chatMessageList.add(userChat)
+
+//            리스트뷰에 연결된 배열의 내용이 변하면 => 새로고침
+            mChatAdapter.notifyDataSetChanged()
+
+//            입력 하고나면 edittext의 내용을 다시 빈칸으로
+//            EditText 에는 text = String이 잘 먹히지 않는다. setText로 대신 사용
+            numberInputEdt.setText("")
+
+        }
+
     }
 
     override fun setValues() {
