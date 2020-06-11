@@ -10,6 +10,9 @@ import kr.co.tjoeun.numberbaseballgame_20200611.datas.Chat
 
 class MainActivity : BaseActivity() {
 
+//    몇번 시도 했는지 저장할 변수
+    var inputCount = 0
+
 //    컴퓨터가 낸 문제 숫자 세개를 저장할 ArrayList
     val computerNumbers = ArrayList<Int>()
 
@@ -119,6 +122,9 @@ class MainActivity : BaseActivity() {
 //    ?S ?B인지 계산해서 리스트뷰에 답장 띄우기 기능 담당 함수
     fun checkStrikeAndBall(inputNum:Int) {
 
+//        시도 횟수를 한번 증가
+        inputCount++
+
 //        inputNum에는 세자리 숫자가 들어온다고 전제.
 //        3자리 숫자를 => 3칸의 배열로 분리. 569 => 5,6,9
         val inputNumArr = ArrayList<Int>()
@@ -175,9 +181,12 @@ class MainActivity : BaseActivity() {
 //        축하 메세지 CPU가 이야기
         val congratulation = Chat("CPU", "축하합니다! 정답을 맞췄습니다!")
         chatMessageList.add(congratulation)
-        mChatAdapter.notifyDataSetChanged()
 
 //        몇번만에 맞췄는지? CPU가 이야기해줘야함.
+
+        val countChat = Chat("CPU", "${inputCount}회 만에 맞췄습니다.")
+        chatMessageList.add(countChat)
+        mChatAdapter.notifyDataSetChanged()
 
 //        더이상 입력하지 못하도록 처리.
         numberInputEdt.isEnabled = false
